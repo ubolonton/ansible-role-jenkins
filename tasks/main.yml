@@ -2,6 +2,8 @@
 # Variable setup.
 - name: Include OS-Specific variables
   include_vars: "{{ ansible_os_family }}.yml"
+  tags:
+    - config
 
 - name: Define jenkins_repo_url
   set_fact:
@@ -26,7 +28,9 @@
   when: ansible_os_family == 'Debian'
 
 # Configure Jenkins init settings.
-- include: settings.yml
+- import_tasks: settings.yml
+  tags:
+    - config
 
 # Make sure Jenkins starts, then configure Jenkins.
 - name: Ensure Jenkins is started and runs on startup.
@@ -40,6 +44,8 @@
   delay: "{{ jenkins_connection_delay }}"
   changed_when: false
   check_mode: no
+  tags:
+    - plugins
 
 - name: Get the jenkins-cli jarfile from the Jenkins server.
   get_url:
@@ -50,6 +56,8 @@
   retries: 5
   delay: 10
   check_mode: no
+  tags:
+    - plugins
 
 - name: Remove Jenkins security init scripts after first startup.
   file:
@@ -57,4 +65,6 @@
     state: absent
 
 # Update Jenkins and install configured plugins.
-- include: plugins.yml
+- import_tasks: plugins.yml
+  tags:
+    - plugins
