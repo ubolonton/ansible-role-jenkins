@@ -54,6 +54,13 @@
     force: yes
   register: jenkins_location_config
 
+- name: Disable anonymous access
+  lineinfile:
+    dest: "{{ jenkins_home }}/config.xml"
+    regexp: '^ *<denyAnonymousReadAccess>false</denyAnonymousReadAccess> *$'
+    line: "  <denyAnonymousReadAccess>true</denyAnonymousReadAccess>"
+  register: jenkins_config
+
 - name: Trigger handlers immediately in case Jenkins was installed
   meta: flush_handlers
 
@@ -62,4 +69,5 @@
   when: (jenkins_users_config is defined and jenkins_users_config.changed) or
         (jenkins_http_config is defined and jenkins_http_config.changed) or
         (jenkins_location_config is defined and jenkins_location_config.changed) or
-        (jenkins_home_config is defined and jenkins_home_config.changed)
+        (jenkins_home_config is defined and jenkins_home_config.changed) or
+        (jenkins_config is defined and jenkins_config.changed)
