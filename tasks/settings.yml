@@ -51,8 +51,15 @@
     dest: "{{ jenkins_home }}/jenkins.model.JenkinsLocationConfiguration.xml"
     owner: jenkins
     group: jenkins
-    force: yes
   register: jenkins_location_config
+
+- name: Disable CLI over Remoting
+  file:
+    src: jenkins.CLI.xml
+    dest: "{{ jenkins_home }}/jenkins.CLI.xml"
+    owner: jenkins
+    group: jenkins
+  register: jenkins_config
 
 - name: Disable anonymous access
   lineinfile:
