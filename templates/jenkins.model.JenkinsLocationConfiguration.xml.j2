@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jenkins.model.JenkinsLocationConfiguration>
+  {% if jenkins_admin_email is defined %}
+    <adminAddress>{{ jenkins_admin_email }}</adminAddress>
+  {% endif %}
+  {% if jenkins_proxy_hostname is defined %}
+    {% if jenkins_proxy_ssl %}
+      <jenkinsUrl>https://{{ jenkins_proxy_hostname }}{{ jenkins_url_prefix }}/</jenkinsUrl>
+    {% else %}
+      <jenkinsUrl>http://{{ jenkins_proxy_hostname }}{{ jenkins_url_prefix }}/</jenkinsUrl>
+    {% endif %}
+  {% endif %}
+</jenkins.model.JenkinsLocationConfiguration>

@@ -45,6 +45,15 @@
     group: "{{ jenkins_process_group }}"
     mode: 0775
 
+- name: Configure jenkins location
+  file:
+    src: jenkins.model.JenkinsLocationConfiguration.xml.j2
+    dest: "{{ jenkins_home }}/jenkins.model.JenkinsLocationConfiguration.xml"
+    owner: jenkins
+    group: jenkins
+    force: yes
+  register: jenkins_location_config
+
 - name: Trigger handlers immediately in case Jenkins was installed
   meta: flush_handlers
 
@@ -52,4 +61,5 @@
   service: name=jenkins state=restarted
   when: (jenkins_users_config is defined and jenkins_users_config.changed) or
         (jenkins_http_config is defined and jenkins_http_config.changed) or
+        (jenkins_location_config is defined and jenkins_location_config.changed) or
         (jenkins_home_config is defined and jenkins_home_config.changed)
