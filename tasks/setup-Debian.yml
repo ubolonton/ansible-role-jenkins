@@ -33,7 +33,8 @@
 - name: Install our specific version of Jenkins.
   apt:
     deb: "/tmp/jenkins_{{ jenkins_version }}_all.deb"
-    state: installed
+    state: present
+    force: yes
   when: jenkins_version is defined and specific_version.stat.exists
   notify: configure default users
 
