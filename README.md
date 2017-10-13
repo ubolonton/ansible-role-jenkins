@@ -1,5 +1,12 @@
 # Ansible Role: Jenkins CI
 
+This is a fork with some bug fixes, and some differences:
+- There are no metadata/dependencies. It's not (yet) for publishing.
+- There are no `jenkins_admin_token...` variables. Jenkins api tokens are to be used like password.
+- `jenkins.model.JenkinsLocationConfiguration.xml` is templated, so that Jenkins can be properly run behind a proxy (the idea comes from https://github.com/Stouts/Stouts.jenkins)).
+- There are tags to facilitate partial execution (`config`/`plugins`).
+- Anonymous access is disabled.
+
 [![Build Status](https://travis-ci.org/geerlingguy/ansible-role-jenkins.svg?branch=master)](https://travis-ci.org/geerlingguy/ansible-role-jenkins)
 
 Installs Jenkins CI on RHEL/CentOS and Debian/Ubuntu servers.
