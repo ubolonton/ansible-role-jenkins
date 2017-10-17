@@ -33,3 +33,15 @@ jenkins_init_changes:
     value: "--prefix={{ jenkins_url_prefix }}"
   - option: "{{ jenkins_java_options_env_var }}"
     value: "{{ jenkins_java_options }}"
+
+jenkins_global_credentials: []
+# jenkins_global_credentials:
+#   - id: github_repo_access_token
+#     description: ""
+#     type: com.cloudbees.plugins.credentials.impl.UsernamePasswordCredentialsImpl
+#     username: <github-username>
+#     password: <github-access-token>
+#   - id: github_repo_access_token_only
+#     description: ""
+#     type: org.jenkinsci.plugins.plaincredentials.impl.StringCredentialsImpl
+#     secret: <github-access-token>

@@ -56,15 +56,23 @@
   retries: 5
   delay: 10
   check_mode: no
-  tags:
-    - plugins
 
 - name: Remove Jenkins security init scripts after first startup.
   file:
     path: "{{ jenkins_home }}/init.groovy.d/basic-security.groovy"
     state: absent
 
+- name: Set up global credentials
+  include_tasks: credential.yml
+  tags:
+    - credentials
+  with_items: "{{ jenkins_global_credentials }}"
+
 # Update Jenkins and install configured plugins.
-- import_tasks: plugins.yml
+- name: Install plugins
+  import_tasks: plugins.yml
   tags:
     - plugins
+
+# TODO: Configure github-plugin-configuration.xml here.
+# TODO: Optionally configure github-oauth settings in config.xml.
