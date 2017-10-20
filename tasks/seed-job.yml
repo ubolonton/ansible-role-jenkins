@@ -1,0 +1,34 @@
+- name: Update seed job declaration
+  environment:
+    JENKINS_AUTH: "{{ jenkins_admin_username }}:{{ jenkins_admin_password }}"
+  shell: "{{ lookup('template', 'jenkins-cli.j2') }} update-job .seed"
+  args:
+    chdir: "{{ jenkins_home }}"
+    stdin: "{{ lookup('template', 'seed-job.xml.j2') }}"
+  register: seed_job_update_result
+  failed_when: seed_job_update_result.rc != 0 and seed_job_update_result.rc != 3
+  changed_when: seed_job_update_result.rc == 0
+
+- name: Create seed job declaration
+  environment:
+    JENKINS_AUTH: "{{ jenkins_admin_username }}:{{ jenkins_admin_password }}"
+  shell: "{{ lookup('template', 'jenkins-cli.j2') }} create-job .seed"
+  args:
+    chdir: "{{ jenkins_home }}"
+    stdin: "{{ lookup('template', 'seed-job.xml.j2') }}"
+  when: seed_job_update_result.rc == 3
+
+- name: Update seed job code
+  copy:
+    src: "{{ jenkins_seed_job_workspace }}"
+    dest: "{{ jenkins_home }}/workspace/.seed/"
+    owner: jenkins
+    group: jenkins
+  when: jenkins_seed_job_workspace is defined
+
+- name: Run seed job
+  environment:
+    JENKINS_AUTH: "{{ jenkins_admin_username }}:{{ jenkins_admin_password }}"
+  shell: "{{ lookup('template', 'jenkins-cli.j2') }} build .seed -s -v"
+  args:
+    chdir: "{{ jenkins_home }}"

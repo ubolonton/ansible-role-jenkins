@@ -74,5 +74,10 @@
   tags:
     - plugins
 
+- name: Create seed job
+  import_tasks: seed-job.yml
+  tags:
+    - seed-job
+
 # TODO: Configure github-plugin-configuration.xml here.
 # TODO: Optionally configure github-oauth settings in config.xml.
