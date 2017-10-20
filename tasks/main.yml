@@ -62,17 +62,17 @@
     path: "{{ jenkins_home }}/init.groovy.d/basic-security.groovy"
     state: absent
 
-- name: Set up global credentials
-  include_tasks: credential.yml
-  tags:
-    - credentials
-  with_items: "{{ jenkins_global_credentials }}"
-
 # Update Jenkins and install configured plugins.
 - name: Install plugins
   import_tasks: plugins.yml
   tags:
     - plugins
+
+- name: Set up global credentials
+  include_tasks: credential.yml
+  tags:
+    - credentials
+  with_items: "{{ jenkins_global_credentials }}"
 
 - name: Create seed job
   import_tasks: seed-job.yml

@@ -26,3 +26,6 @@
   with_items: "{{ jenkins_plugins }}"
   when: jenkins_admin_password != ""
   notify: restart jenkins
+
+- name: Trigger handlers immediately after plugin installation
+  meta: flush_handlers
