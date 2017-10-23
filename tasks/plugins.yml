@@ -29,3 +29,6 @@
 
 - name: Trigger handlers immediately after plugin installation
   meta: flush_handlers
+
+- name: Wait for Jenkins to start up after installing plugins.
+  import_tasks: wait.yml
