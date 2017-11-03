@@ -1,9 +1,30 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
+  <actions/>
   <description>Seed Job to create other jobs. Should be run once, or once in a while after changing job declarations.</description>
   <keepDependencies>false</keepDependencies>
   <properties/>
+{% if jenkins_seed_job_git_repo is defined %}
+  <scm class="hudson.plugins.git.GitSCM">
+    <configVersion>2</configVersion>
+    <userRemoteConfigs>
+      <hudson.plugins.git.UserRemoteConfig>
+        <url>{{ jenkins_seed_job_git_repo }}</url>
+        <credentialsId>{{ jenkins_seed_job_git_credentials }}</credentialsId>
+      </hudson.plugins.git.UserRemoteConfig>
+    </userRemoteConfigs>
+    <branches>
+      <hudson.plugins.git.BranchSpec>
+        <name>{{ jenkins_seed_job_branch }}</name>
+      </hudson.plugins.git.BranchSpec>
+    </branches>
+    <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+    <submoduleCfg class="list"/>
+    <extensions/>
+  </scm>
+{% else %}
   <scm class="hudson.scm.NullSCM"/>
+{% endif %}
   <canRoam>true</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
