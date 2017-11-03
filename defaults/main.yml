@@ -47,7 +47,11 @@ jenkins_global_credentials: []
 #     secret: <github-access-token>
 
 # jenkins_seed_job_main: main.groovy
-# If these are specified, get the scripts from the git repo.
+
+# If this is defined, get Job DSL code from control machine.
+# jenkins_seed_job_workspace: <relative-path-to-seed-job-code-on-control-machine>
+
+# If these are defined, get Job DSL code from the git repo.
 # jenkins_seed_job_git_repo: <https-git-repo>
 # jenkins_seed_job_git_credentials: <username-password-credentialsId>
 # jenkins_seed_job_branch: <branch>

@@ -32,3 +32,5 @@
   shell: "{{ lookup('template', 'jenkins-cli.j2') }} build .seed -s -v"
   args:
     chdir: "{{ jenkins_home }}"
+  # XXX: Because it will fail on first run (needing approval). Just check the output, and run it once afterwards, if needed.
+  failed_when: false
