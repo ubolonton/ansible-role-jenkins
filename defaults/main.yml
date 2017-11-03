@@ -46,4 +46,4 @@ jenkins_global_credentials: []
 #     type: org.jenkinsci.plugins.plaincredentials.impl.StringCredentialsImpl
 #     secret: <github-access-token>
 
-jenkins_seed_job_main: main.groovy
+# jenkins_seed_job_main: main.groovy

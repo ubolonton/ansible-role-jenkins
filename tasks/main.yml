@@ -82,6 +82,7 @@
 
 - name: Create seed job
   import_tasks: seed-job.yml
+  when: jenkins_seed_job_main is defined
   tags:
     - seed-job
 
