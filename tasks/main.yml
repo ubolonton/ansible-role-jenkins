@@ -1,5 +1,4 @@
 ---
-# TODO: Create jenkin here, with $HOME set to jenkins_home
 - group:
     name: jenkins
     system: yes

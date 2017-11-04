@@ -6,6 +6,7 @@ This is a fork with some bug fixes, and some differences:
 - `jenkins.model.JenkinsLocationConfiguration.xml` is templated, so that Jenkins can be properly run behind a proxy (the idea comes from https://github.com/Stouts/Stouts.jenkins)).
 - There are tags to facilitate partial execution (`config`/`plugins`).
 - Anonymous access is disabled.
+- There is support for credentials and seed job (using Job DSL). TODO: Consider splitting into multiple roles, which can be selectively used by playbooks, e.g. by tagging whole roles.
 
 [![Build Status](https://travis-ci.org/geerlingguy/ansible-role-jenkins.svg?branch=master)](https://travis-ci.org/geerlingguy/ansible-role-jenkins)
 
