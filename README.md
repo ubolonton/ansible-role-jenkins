@@ -4,7 +4,12 @@ This is a fork with some bug fixes, and some differences:
 - There are no metadata/dependencies. It's not (yet) for publishing.
 - There are no `jenkins_admin_token...` variables. Jenkins api tokens are to be used like password.
 - `jenkins.model.JenkinsLocationConfiguration.xml` is templated, so that Jenkins can be properly run behind a proxy (the idea comes from https://github.com/Stouts/Stouts.jenkins)).
-- There are tags to facilitate partial execution (`config`/`plugins`).
+- There are tags to facilitate partial execution
+  + `jenkins-config`
+  + `jenkins-plugins`
+  + `jenkins-credentials`
+  + `jenkins-seed-job`
+  + `jenkins-nodes`
 - Anonymous access is disabled.
 - There is support for credentials and seed job (using Job DSL). TODO: Consider splitting into multiple roles, which can be selectively used by playbooks, e.g. by tagging whole roles.
 
