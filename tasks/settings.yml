@@ -69,10 +69,3 @@
     owner: jenkins
     group: jenkins
   notify: restart jenkins
-
-- name: Disable anonymous access
-  lineinfile:
-    dest: "{{ jenkins_home }}/config.xml"
-    regexp: '^ *<denyAnonymousReadAccess>false</denyAnonymousReadAccess> *$'
-    line: "  <denyAnonymousReadAccess>true</denyAnonymousReadAccess>"
-  notify: restart jenkins
