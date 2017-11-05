@@ -85,5 +85,12 @@
   tags:
     - seed-job
 
+- name: Set up nodes
+  include_tasks: node.yml
+  with_items: "{{ jenkins_nodes }}"
+  when: jenkins_master_ssh_key_credentials_id is defined
+  tags:
+    - jenkins-nodes
+
 # TODO: Configure github-plugin-configuration.xml here.
 # TODO: Optionally configure github-oauth settings in config.xml.

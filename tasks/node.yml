@@ -1,0 +1,19 @@
+- name: Update node "{{ item['name'] }}"
+  environment:
+    JENKINS_AUTH: "{{ jenkins_admin_username }}:{{ jenkins_admin_password }}"
+  shell: "{{ lookup('template', 'jenkins-cli.j2') }} update-node {{ item['name'] }}"
+  args:
+    chdir: "{{ jenkins_home }}"
+    stdin: "{{ lookup('template', 'node.xml.j2') }}"
+  register: node_update_result
+  failed_when: node_update_result.rc != 0 and node_update_result.rc != 3
+  changed_when: node_update_result.rc == 0
+
+- name: Create node "{{ item['name'] }}"
+  environment:
+    JENKINS_AUTH: "{{ jenkins_admin_username }}:{{ jenkins_admin_password }}"
+  shell: "{{ lookup('template', 'jenkins-cli.j2') }} create-node {{ item['name'] }}"
+  args:
+    chdir: "{{ jenkins_home }}"
+    stdin: "{{ lookup('template', 'node.xml.j2') }}"
+  when: node_update_result.rc == 3

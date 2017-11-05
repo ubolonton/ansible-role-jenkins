@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<slave>
+  <name>{{ item['name'] }}</name>
+  <description></description>
+  <remoteFS>{{ jenkins_home }}</remoteFS>
+  <numExecutors>{{ item['executors'] }}</numExecutors>
+  <mode>NORMAL</mode>
+  <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+  <launcher class="hudson.plugins.sshslaves.SSHLauncher">
+    <host>{{ item['host'] }}</host>
+    <port>22</port>
+    <credentialsId>{{ jenkins_master_ssh_key_credentials_id }}</credentialsId>
+    <maxNumRetries>5</maxNumRetries>
+    <retryWaitTime>0</retryWaitTime>
+    <sshHostKeyVerificationStrategy class="hudson.plugins.sshslaves.verifiers.NonVerifyingKeyVerificationStrategy"/>
+  </launcher>
+  <label>{{ item['labels'] | default([]) | join(" ") }}</label>
+  <nodeProperties/>
+</slave>
