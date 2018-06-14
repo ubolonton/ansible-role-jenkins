@@ -4,7 +4,7 @@ galaxy_info:
   description: Jenkins CI
   company: "Midwestern Mac, LLC"
   license: "license (BSD, MIT)"
-  min_ansible_version: 2.2
+  min_ansible_version: 2.4
   platforms:
   - name: EL
     versions:
@@ -22,3 +22,5 @@ galaxy_info:
   galaxy_tags:
     - development
     - packaging
+    - jenkins
+    - ci
