@@ -77,7 +77,7 @@
   include_tasks: credential.yml
   tags:
     - jenkins-credentials
-  with_items: "{{ jenkins_global_credentials }}"
+  with_dict: "{{ jenkins_global_credentials }}"
 
 - name: Create seed job
   import_tasks: seed-job.yml
