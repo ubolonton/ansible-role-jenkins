@@ -8,6 +8,8 @@
   register: node_update_result
   failed_when: node_update_result.rc != 0 and node_update_result.rc != 3
   changed_when: node_update_result.rc == 0
+  tags:
+    - always # XXX: https://github.com/ansible/ansible/issues/30882#issuecomment-380596557
 
 - name: Create node "{{ item['name'] }}"
   environment:
@@ -17,3 +19,5 @@
     chdir: "{{ jenkins_home }}"
     stdin: "{{ lookup('template', 'node.xml.j2') }}"
   when: node_update_result.rc == 3
+  tags:
+    - always # XXX: https://github.com/ansible/ansible/issues/30882#issuecomment-380596557
