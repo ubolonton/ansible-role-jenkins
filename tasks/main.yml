@@ -1,12 +1,12 @@
 ---
 - group:
-    name: jenkins
+    name: "{{ jenkins_process_group }}"
     system: yes
     state: present
 
 - user:
-    name: jenkins
-    group: jenkins
+    name: "{{ jenkins_process_user }}"
+    group: "{{ jenkins_process_group }}"
     createhome: yes
     home: "{{ jenkins_home }}"
     system: yes
